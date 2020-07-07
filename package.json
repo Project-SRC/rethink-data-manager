@@ -1,0 +1,16 @@
+{
+  "name": "rethink-data-manager",
+  "version": "0.1.0",
+  "description": "Websocket server to manage RethinkDB - Project SRC",
+  "main": "src/main.py",
+  "repository": "https://github.com/Project-SRC/rethink-data-manager",
+  "author": "João Pedro Sconetto",
+  "license": "GPL-3.0-or-later",
+  "private": false,
+  "scripts": {
+    "release": "standard-version"
+  },
+  "devDependencies": {
+    "standard-version": "^7.1.0"
+  }
+}

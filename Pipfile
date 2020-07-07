@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+asyncio = "==3.4.3"
+requests = "==2.24.0"
+rethinkdb = "==2.4.7"
+websockets = "==8.1"
+python-dotenv = "==0.14.0"
+flake8 = "*"
+
+[dev-packages]
+bandit = "==1.6.2"
+flake8 = "==3.8.3"
+ipdb = "==0.13.3"
+pytest = "==5.4.3"
+pytest-asyncio = "==0.14.0"
+pytest-cov = "==2.10.0"
+
+[requires]
+python_version = "3.8"

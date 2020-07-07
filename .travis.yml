@@ -1,0 +1,85 @@
+dist: bionic
+
+language: python
+
+python:
+  - "3.7"
+  - "3.8"
+
+services:
+  - docker
+
+env:
+  global:
+    - TAG_REF=$(git describe --tags --always)
+    - NAME=time_operator
+    - CACHE_FOLDER=$HOME/docker-image
+    - CACHE_FILE=${CACHE_FOLDER}/${NAME}-${TAG_REF}.tar.gz
+    - CC_TEST_REPORTER_ID=False
+
+cache:
+  directories:
+    - "$HOME/.npm"
+    - "$HOME/.cache/yarn"
+    - "$HOME/.cache/pip"
+    - "$HOME/docker-image"
+
+before_install:
+  - npm install
+
+install:
+  - pip install -U pip
+  - pip install pipenv
+  - pipenv install
+
+jobs:
+  include:
+    - stage: lint
+      before_install: skip
+      script:
+        - flake8 src/ --ignore=E501,F541
+    - stage: security
+      before_install: skip
+      script:
+        - bandit -r src -x=src/tests,src/client.py
+    # - stage: build_dev
+    #   if: branch = develop
+    #   before_install: skip
+    #   script:
+    #     - docker build -t rethink-data-manager:latest-${TAG-REF}.
+    #     - mkdir -p ${CACHE_FOLDER}
+    #     - docker save $(docker images --filter "reference=${DOCKER_USERNAME}/${NAME}:latest-${TAG_REF}" -q) | gzip > ${CACHE_FILE}
+    # - stage: build_prod
+    #   if: branch = master
+    #   before_install: skip
+    #   script:
+    #     - faas-cli template pull
+    #     - faas-cli build -f time_operator.yml --build-arg ADDITIONAL_PACKAGE="python3-dev libstdc++ g++"
+    #     - mkdir -p ${CACHE_FOLDER}
+    #     - docker save $(docker images --filter "reference=${DOCKER_USERNAME}/${NAME}:latest" -q) | gzip -c > ${CACHE_FILE}
+    # - stage: deploy_image
+    #   if: branch = master
+    #   before_install: skip
+    #   script:
+    #     - ls -la ${CACHE_FOLDER}
+    #     - if [[ -f ${CACHE_FILE} ]]; then docker load -i ${CACHE_FILE}; fi
+    #     - docker tag $(docker images -q) ${DOCKER_USERNAME}/${NAME}:latest
+    #     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    #     - faas-cli push -f time_operator.yml
+    # - stage: deploy_image
+    #   if: branch = develop
+    #   before_install: skip
+    #   script:
+    #     - ls -la ${CACHE_FOLDER}
+    #     - if [[ -f ${CACHE_FILE} ]]; then docker load -i ${CACHE_FILE}; fi
+    #     - docker tag $(docker images -q) ${DOCKER_USERNAME}/${NAME}:latest-${TAG_REF}
+    #     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    #     - faas-cli push -f time_operator.yml --tag describe
+    
+script:
+  - export PYTHONPATH=$(pwd)
+  - pytest
+  - pytest --cov=src src/
+  - pytest --cov=src --cov-report xml src/
+  - unset PYTHONPATH
+  # - bash <(curl -s https://codecov.io/bash)

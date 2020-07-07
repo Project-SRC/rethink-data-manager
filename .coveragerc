@@ -1,0 +1,8 @@
+[run]
+omit = src/__init__.py
+       src/**/__init__.py
+       src/client.py
+       src/main.py
+
+[xml]
+output = docs/coverage.xml
