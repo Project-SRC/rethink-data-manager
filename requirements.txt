@@ -4,3 +4,4 @@ rethinkdb==2.4.7
 websockets==8.1
 python-dotenv==0.14.0
 flake8
+environs==7.4.0
