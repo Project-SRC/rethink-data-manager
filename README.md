@@ -1,5 +1,8 @@
 # Rethink Data Manager
 
+[![codecov](https://codecov.io/gh/Project-SRC/rethink-data-manager/branch/develop/graph/badge.svg)](https://codecov.io/gh/Project-SRC/rethink-data-manager)
+[![Build Status](https://travis-ci.com/Project-SRC/rethink-data-manager.svg?branch=develop)](https://travis-ci.com/Project-SRC/rethink-data-manager)
+
 **RDM (Rethink Data Manager)** is a service to comunicate other systems to the database of the project, using a RethinkDB. An interface with database operations are available through a websocket server.
 
 ## Parameters
@@ -344,6 +347,9 @@ During the lint process the terminal will report a bug report and warnings from 
 Para construir e rodar o container do microsserviço basta rodar os seguintes comandos:
 
 ```shell
+docker run -it -d --add-host=database:172.17.0.1 --name rethinkdb -v "$PWD:/data" -p 8081:8080 -P rethinkdb:latest
 docker build -t rethink-data-manager:latest .
-docker run -d --name rethink-data-manager -p 8765:8765 --net=host rethink-data-manager
+docker run -d --name rethink-data-manager -p 8765:8765 --env-file .env --link=rethinkdb:database rethink-data-manager:latest
 ```
+
+**OBSERVATION**: The first command will create a running docker instance of RethinkDB
