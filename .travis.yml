@@ -29,6 +29,7 @@ before_install:
 
 install:
   - pip install -U pip
+  - pip install --no-cache-dir pytest pytest-cov pytest-asyncio
   - pip install pipenv
   - pipenv install
 
@@ -41,6 +42,7 @@ jobs:
     - stage: security
       before_install: skip
       script:
+        - pip install --no-cache-dir bandit
         - bandit -r src -x=src/tests,src/client.py
     - stage: build_dev
       if: branch = develop
