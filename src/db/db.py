@@ -3,7 +3,7 @@ from rethinkdb import r
 import logging
 
 USER = "admin"
-PASSWORD = ""
+PASSWORD = "" # nosec
 
 
 def connect(
