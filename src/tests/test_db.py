@@ -37,9 +37,12 @@ unique_id = ""
 @pytest.fixture(scope="session", autouse=True)
 def configure_database():
     connection = connect(ReDB_HOST, ReDB_PORT, user=ReDB_USER, password=ReDB_PASS)
+    # Initial Set Up
+    drop_table(database, table, connection)
+    drop_table(database, empty_table, connection)
+    create_table(database, table, connection)
     create_table(database, empty_table, connection)
-    if len(get_all(database, table, connection)) > 0:
-        delete_all(database, table, connection)
+
     data = [
         {
             "name": "The Dark Knight Rises",
