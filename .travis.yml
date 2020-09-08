@@ -76,7 +76,6 @@ jobs:
         - docker push ${DOCKER_USERNAME}/${NAME}:latest-${TAG_REF}
     
 script:
-  - CAN_FAIL=true
   - export PYTHONPATH=$(pwd)
   - pytest
   - pytest --cov=src src/
