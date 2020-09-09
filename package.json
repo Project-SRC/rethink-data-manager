@@ -1,6 +1,6 @@
 {
   "name": "rethink-data-manager",
-  "version": "0.1.0",
+  "version": "0.0.1-alpha",
   "description": "Websocket server to manage RethinkDB - Project SRC",
   "main": "src/main.py",
   "repository": "https://github.com/Project-SRC/rethink-data-manager",
