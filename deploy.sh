@@ -6,6 +6,6 @@
 
 docker build -t rethink-data-manager:latest .
 
-docker tag rethink-data-manager:latest radop/rethink-data-manager:latest
+docker tag rethink-data-manager:latest sconetto/rethink-data-manager:latest
 
-docker push radop/rethink-data-manager:latest
+docker push sconetto/rethink-data-manager:latest

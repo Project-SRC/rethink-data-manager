@@ -3,7 +3,7 @@ from rethinkdb import r
 import logging
 
 USER = "admin"
-PASSWORD = ""
+PASSWORD = ""  # nosec
 
 
 def connect(
@@ -111,7 +111,7 @@ def get_all(database, table, connection):
             )
         else:
             result = list(cursor.items)
-            if result is None or len(result) == 0:
+            if result is None:
                 raise Exception(
                     f"Select Error.\nCouldn't find any data in:"
                     f"\n\tdatabase: {database}\n\ttable: {table}"

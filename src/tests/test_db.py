@@ -37,8 +37,12 @@ unique_id = ""
 @pytest.fixture(scope="session", autouse=True)
 def configure_database():
     connection = connect(ReDB_HOST, ReDB_PORT, user=ReDB_USER, password=ReDB_PASS)
+    # Initial Set Up
+    drop_table(database, table, connection)
+    drop_table(database, empty_table, connection)
+    create_table(database, table, connection)
     create_table(database, empty_table, connection)
-    delete_all(database, table, connection)
+
     data = [
         {
             "name": "The Dark Knight Rises",
@@ -86,7 +90,7 @@ def configure_database():
     result = insert(database, table, data, connection)
 
     global unique_id
-    unique_id = result["generated_keys"][0]
+    unique_id = result.get("generated_keys")[0]
 
 
 @pytest.fixture
@@ -200,7 +204,7 @@ def test_unsuccessful_get_all(rethink_connect):
     result = get_all(database, empty_table, rethink_connect)
     assert result is not None
     assert len(result) == 0
-    assert result == {}
+    assert result == []
 
 
 def test_successful_get(rethink_connect):
