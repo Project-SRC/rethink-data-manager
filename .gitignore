@@ -567,3 +567,6 @@ MigrationBackup/
 
 # Visual Studo Code config files
 .vscode/
+
+# Custom docker run command (for local database)
+rethink.docker.run
