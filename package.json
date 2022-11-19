@@ -6,11 +6,11 @@
   "repository": "https://github.com/Project-SRC/rethink-data-manager",
   "author": "João Pedro Sconetto",
   "license": "GPL-3.0-or-later",
-  "private": false,
   "scripts": {
     "release": "standard-version"
   },
   "devDependencies": {
     "standard-version": "^9.0.0"
-  }
+  },
+  "packageManager": "yarn@3.3.0"
 }
