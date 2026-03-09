@@ -3,11 +3,11 @@
 [![codecov](https://codecov.io/gh/Project-SRC/rethink-data-manager/branch/develop/graph/badge.svg)](https://codecov.io/gh/Project-SRC/rethink-data-manager)
 [![Build Status](https://travis-ci.com/Project-SRC/rethink-data-manager.svg?branch=develop)](https://travis-ci.com/Project-SRC/rethink-data-manager)
 
-**RDM (Rethink Data Manager)** is a service to comunicate other systems to the database of the project, using a RethinkDB. An interface with database operations are available through a websocket server.
+**RDM (Rethink Data Manager)** is a service to communicate other systems to the database of the project, using a RethinkDB. An interface with database operations are available through a websocket server.
 
 ## Parameters
 
-**RDM** runs in the [websocket](https://tools.ietf.org/html/rfc6455) format, so it expects a message on the communication channel, the initial message must be an __JSON__ in the following format:
+**RDM** runs in the [websocket](https://tools.ietf.org/html/rfc6455) format, so it expects a message on the communication channel, the initial message must be an **JSON** in the following format:
 
 ```shell
 {
@@ -64,7 +64,7 @@ Before installing the environment tools, make sure that you have a [RethinkDB](h
 
 ### Installing VirtualEnvWrapper
 
-We recommend using a virtual environment created by the __virtualenvwrapper__ module. There is a virtual site with English instructions for installation that can be accessed [here](https://virtualenvwrapper.readthedocs.io/en/latest/install.html). But you can also follow these steps below for installing the environment:
+We recommend using a virtual environment created by the **virtualenvwrapper** module. There is a virtual site with English instructions for installation that can be accessed [here](https://virtualenvwrapper.readthedocs.io/en/latest/install.html). But you can also follow these steps below for installing the environment:
 
 ```shell
 sudo python3 -m pip install -U pip             # Update pip
@@ -73,7 +73,7 @@ sudo python3 -m pip install virtualenvwrapper  # Install virtualenvwrapper modul
 
 **Observation**: If you do not have administrator access on the machine remove `sudo` from the beginning of the command and add the flag `--user` to the end of the command.
 
-Now configure your shell to use **virtualenvwrapper** by adding these two lines to your shell initialization file (e.g. `.bashrc`,` .profile`, etc.)
+Now configure your shell to use **virtualenvwrapper** by adding these two lines to your shell initialization file (e.g. `.bashrc`,`.profile`, etc.)
 
 ```shell
 export WORKON_HOME=\$HOME/.virtualenvs
@@ -293,7 +293,7 @@ Therefore, for the creation of the table, in the `payload` there must be the inf
 
 The calling URL will depend on the configuration of _host_ and the port of _webscoket_, but the example in local tests would be `localhost:8765/create_table`.
 
-__Observation__: Any error that occurs in the operations the _response_ package must send a message. For more complete information just check the RDM _logs_.
+**Observation**: Any error that occurs in the operations the _response_ package must send a message. For more complete information just check the RDM _logs_.
 
 ## Local Execution
 
@@ -317,17 +317,17 @@ Ensure that RethinkDB is running and accessible, and, if necessary, configure th
 
 ## Tests
 
-To run the __RDM__ tests follow the script below:
+To run the **RDM** tests follow the script below:
 
-1.  Enable _virtualenv_ **rethink**;
-2.  Ensure that the dependencies are installed, especially:
+1. Enable _virtualenv_ **rethink**;
+2. Ensure that the dependencies are installed, especially:
 
         pytest
         pytest-asyncio
         pytest-coverage
         flake8
 
-3.  Run the commands below:
+3. Run the commands below:
 
 ```shell
 export PYTHONPATH=$(pwd)                   # Set the python path as the project folder
